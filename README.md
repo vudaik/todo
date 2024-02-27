@@ -15,3 +15,7 @@ Deployment target: Server (Node.js hosting)
 Development tools: jsconfig.json (Recommended for VS Code if you're not using typescript)  
 Continuous integration: None  
 Version control system: None  
+
+
+npm install yarn // npm install yarn --force
+yarn dev
