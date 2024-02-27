@@ -1,5 +1,7 @@
 
-<template> <TaskList /> </template>
+<template>
+  <TaskList />
+</template>
 
 
 <script lang="ts">
