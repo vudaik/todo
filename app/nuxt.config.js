@@ -18,10 +18,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    'bootstrap/dist/css/bootstrap.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/jquery.js', mode: 'client' },
+    { src: '~/plugins/bootstrap.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,5 +50,15 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  router: {
+    // extendRoutes(routes, resolve) {
+    //   routes.push({
+    //     name: 'task_list', 
+    //     path: '/task_list', 
+    //     component: resolve(__dirname, 'components/ToDoList.vue') 
+    //   })
+    // }
   }
 }
