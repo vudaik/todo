@@ -5,7 +5,7 @@ yarn create nuxt-app app
 Project name: app  
 Programming language: TypeScript  
 Package manager: Yarn  
-UI framework: None  
+UI framework: Bootstrap  
 Template engine: HTML  
 Nuxt.js modules: Axios - Promise based HTTP client  
 Linting tools: ESLint  
