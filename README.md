@@ -1,23 +1,7 @@
 # todo
 
-yarn create nuxt-app app  
+npx nuxi@latest init <project-name>  
+cd <project-name>  
+yarn install  
 
-Project name: app  
-Programming language: TypeScript  
-Package manager: Yarn  
-UI framework: Bootstrap  
-Template engine: HTML  
-Nuxt.js modules: Axios - Promise based HTTP client  
-Linting tools: ESLint  
-Testing framework: None  
-Rendering mode: Universal (SSR / SSG)  
-Deployment target: Server (Node.js hosting)  
-Development tools: jsconfig.json (Recommended for VS Code if you're not using typescript)  
-Continuous integration: None  
-Version control system: None  
-
-
-npm install yarn // npm install yarn --force  //  yarn install  
-yarn add vuex@next --save  
-yarn add nuxt-property-decorator  
-yarn dev  
+ 

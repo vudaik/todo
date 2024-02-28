@@ -17,10 +17,10 @@
     "core-js": "^3.25.3",
     "jquery": "^3.7.1",
     "nuxt": "^2.15.8",
+    "pinia": "^2.1.7",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
-    "vuex": "^4.0.2",
     "yarn": "^1.22.21"
   },
   "devDependencies": {
@@ -32,5 +32,8 @@
     "eslint": "^8.24.0",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-vue": "^9.5.1"
+  },
+  "alias": {
+    "pinia": "pinia/dist/pinia.mjs"
   }
 }
