@@ -17,5 +17,6 @@ Continuous integration: None
 Version control system: None  
 
 
-npm install yarn // npm install yarn --force
-yarn dev
+npm install yarn // npm install yarn --force  
+yarn add vuex@next --save  
+yarn dev  
