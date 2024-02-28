@@ -17,6 +17,7 @@ Continuous integration: None
 Version control system: None  
 
 
-npm install yarn // npm install yarn --force  
+npm install yarn // npm install yarn --force  //  yarn install  
 yarn add vuex@next --save  
+yarn add nuxt-property-decorator  
 yarn dev  
