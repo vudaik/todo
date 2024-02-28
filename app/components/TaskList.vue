@@ -28,9 +28,8 @@
                                         <Task />
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">CLOSE</button>
-                                        <button type="button" class="btn btn-primary">CREATE</button>
+                                        <button type="button" class="btn btn-outline-success">CREATE</button>
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">CLOSE</button>
                                     </div>
                                 </div>
                             </div>
