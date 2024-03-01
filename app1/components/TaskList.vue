@@ -14,7 +14,8 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span class="text-start">TODO LIST</span>
                     <div class="d-flex justify-content-end">
-                        <NuxtLink to="" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD TASK</NuxtLink>
+                        <!-- <NuxtLink to="/jjj" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD TASK</NuxtLink> -->
+                        <div @click="onClick" data-bs-toggle="modal" data-bs-target="#exampleModal" >ADD TASK</div>
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-xl">
@@ -29,7 +30,8 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-success">CREATE</button>
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">CLOSE</button>
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            data-bs-dismiss="modal">CLOSE</button>
                                     </div>
                                 </div>
                             </div>
@@ -52,5 +54,12 @@
             </div>
         </div>
 
-</div></template>
+    </div>
+</template>
 
+
+<script setup lang="ts">
+    const onClick = () => {
+        alert('ádsad')
+    }
+</script>
