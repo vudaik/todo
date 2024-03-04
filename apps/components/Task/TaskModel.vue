@@ -47,11 +47,9 @@
 
 .input-group-prepend {
     width: 110px;
-    /* Đặt chiều rộng cố định cho các phần tử input-group-prepend */
 }
 
 .input-group-prepend span {
     margin-right: 10px;
-    /* Thụt vào từ bên phải một chút */
 }
 </style>

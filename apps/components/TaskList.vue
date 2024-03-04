@@ -23,7 +23,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <Task />
+                                        <TaskModel />
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-success">CREATE</button>
@@ -37,7 +37,13 @@
                 </div>
 
                 <div class="card-body">
-                    <TaskDetail />
+                    <div style="height: calc(100vh - 170px); overflow-y: auto;">
+                        <ul class="list">
+                            <li v-for="todo in data" :key="todo.id">
+                                <TaskDetail :title="todo.title" />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -55,6 +61,34 @@
 </template>
 
 <script setup lang="ts">
-// import Task from '../components/Task/Task.vue'
-// import TaskDetail from '../components/Task/TaskDetail.vue'
+
+const dataPath: string = 'https://jsonplaceholder.typicode.com/todos'
+const data = ref([])
+const getData = async () => {
+    try {
+        const response = await fetch(dataPath);
+        if (!response.ok) {
+            console.log('Network response was not ok')
+            throw new Error('Network response was not ok');
+        }
+        const dt = await response.json();
+        data.value = dt;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+onMounted(() => {
+    getData();
+})
+
 </script>
+
+<style scoped>
+.list {
+    list-style-type: none;
+}
+
+.list li {
+    margin-top: 10px;
+}
+</style>
