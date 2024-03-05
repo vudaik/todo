@@ -111,23 +111,25 @@ export const handleDragStart = (event: DragEvent, task: Task) => {
 
 export const handleDragOver = (event: DragEvent, listName: string) => {
     event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
-    console.log('Đang kéo xuống:', listName);
+    if (event.dataTransfer) {
+        event.dataTransfer.dropEffect = 'move';
+        console.log('Đang kéo xuống:', listName);
 
-    if (draggedTask.value) {
-        removeFromOriginalList(draggedTask.value);
-        switch (listName) {
-            case 'taskList':
-                pushTask(taskList, draggedTask.value)
-                break;
-            case 'toDoList':
-                pushTask(toDoList, draggedTask.value)
-                break;
-            case 'doneList':
-                pushTask(doneList, draggedTask.value)
-                break;
-            default:
-                break;
+        if (draggedTask.value) {
+            removeFromOriginalList(draggedTask.value);
+            switch (listName) {
+                case 'taskList':
+                    pushTask(taskList, draggedTask.value);
+                    break;
+                case 'toDoList':
+                    pushTask(toDoList, draggedTask.value);
+                    break;
+                case 'doneList':
+                    pushTask(doneList, draggedTask.value);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
