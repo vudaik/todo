@@ -1,47 +1,65 @@
-<!-- Main.vue -->
-
 <template>
     <div>
-        <ul class="task-list">
-            <li v-for="todo in data" :key="todo.id">
-                <TaskDetail :title="todo.title" />
-            </li>
-        </ul>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">List</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li v-for="(task, index) in taskList" :key="task.id" class="list-group-item"> {{ task.name
+                                }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header bg-warning">
+                            <h5 class="card-title mb-0">To Do</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li v-for="(task, index) in toDoList" :key="task.id" class="list-group-item">{{ task.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="card-title mb-0">Done</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li v-for="(task, index) in doneList" :key="task.id" class="list-group-item">{{ task.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import draggable from 'vuedraggable';
 
-const dataPath: string = 'https://jsonplaceholder.typicode.com/todos'
-const data = ref([])
-const getData = async () => {
-    try {
-        const response = await fetch(dataPath);
-        if (!response.ok) {
-            console.log('Network response was not ok')
-            throw new Error('Network response was not ok');
-        }
-        const dt = await response.json();
-        data.value = dt;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
+const tasks = reactive([
+    { id: 1, name: 'Task 1', status: 'todo' },
+    { id: 2, name: 'Task 2', status: 'none' },
+    { id: 3, name: 'Task 3', status: 'done' },
+]);
+
+function taskChanged(event: any) {
+    // Handle task change here
+    console.log('Task changed:', event);
 }
-onMounted(() => {
-    getData();
-})
 
+const taskList = tasks.filter(task => task.status === 'none');
+const toDoList = tasks.filter(task => task.status === 'todo');
+const doneList = tasks.filter(task => task.status === 'done');
 </script>
 
-
-<style scoped>
-.task-list {
-    list-style-type: none;
-    /* Loại bỏ dấu chấm đầu dòng */
-}
-
-.task-list li {
-    margin-top: 10px;
-    /* Cách nhau 10px */
-}
+<style>
+/* Add custom styles here */
 </style>

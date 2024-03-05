@@ -12,8 +12,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">User ID</span>
             </div>
-            <input type="text" class="form-control" placeholder="User identification in the system" aria-label="Username"
-                aria-describedby="basic-addon1">
+            <input type="text" class="form-control" placeholder="User identification in the system"
+                aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         <div class="input-group mb-3">
@@ -35,7 +35,7 @@
 </template>
 
 
-<style>
+<style scoped>
 .input-group.mb-3 {
     transition: margin 0.2s;
     margin-left: 0;
