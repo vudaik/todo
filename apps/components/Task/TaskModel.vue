@@ -1,38 +1,28 @@
 <template>
     <div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">ID</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Identified in the job list" aria-label="Username"
-                aria-describedby="basic-addon1">
-        </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">User ID</span>
             </div>
-            <input type="text" class="form-control" placeholder="User identification in the system"
-                aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+                v-model="detailTask.userID" :value="">
         </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Title</span>
             </div>
-            <input type="text" class="form-control" placeholder="Short definition of job details" aria-label="Username"
-                aria-describedby="basic-addon1">
+            <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+                v-model="detailTask.title">
         </div>
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Complete</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Job status" aria-label="Username"
-                aria-describedby="basic-addon1">
-        </div>
     </div>
 </template>
+
+<script setup lang="ts">
+const props = defineProps<{ detailTask: Task, userIDModify: number, titleIDModify: string }>()
+</script>
 
 
 <style scoped>

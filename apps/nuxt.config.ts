@@ -21,7 +21,6 @@ export default ({
 
   css: ["bootstrap/dist/css/bootstrap.css"],
   plugins: [
-    { src: '~/plugins/bootstrap.ts', mode: 'client' }
   ],
 
   components: true,

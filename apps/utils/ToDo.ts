@@ -9,16 +9,16 @@ export const doneTaskSearch = ref('')
 export const toDoTaskSearch = ref('')
 
 
-const dataPath: string = 'https://jsonplaceholder.typicode.com/todos'
+const DATA_PATH: string = 'https://jsonplaceholder.typicode.com/todos'
 var draggedTask = ref<Task>() // không thể để reactive() ???? -> tìm hiểu thêm
 
 
 
-interface Task {
-    id: number;
-    userID: number;
-    title: string;
-    completed: boolean;
+export interface Task {
+    id: number
+    userID: number
+    title: string
+    completed: boolean
 }
 
 
@@ -34,7 +34,7 @@ const createTask = (params: Partial<Task> = {}): Task => {
 
 const fetchTasks = async (list: Task[]) => {
     try {
-        const response = await axios.get(dataPath);
+        const response = await axios.get(DATA_PATH);
         const todos = response.data;
 
         toDoList.splice(0);
@@ -57,7 +57,7 @@ const fetchTasks = async (list: Task[]) => {
         console.error('Error fetching data:', error);
     }
 }
-fetchTasks(toDoList);
+fetchTasks(toDoList);  // học vòng đời rồi đặt get data trong nó
 
 
 const pushTask = (list: Task[], task: Task) => {
@@ -134,6 +134,38 @@ export const handleDragOver = (event: DragEvent, listName: string) => {
     }
 }
 
+
+export const createNewTaskEvent = (task: Task) => {
+    console.log('create ', task.id, task.userID, task.title)
+    pushTask(toDoList, task)
+}
+
+
+export const updateTaskEvent = (task: Task) => {
+    console.log('update ', task.id, task.userID, task.title)
+
+    // xóa cái hiện tại 
+    // thêm lại cái mới có 
+}
+
+
+export const doneTaskEvent = (task: Task) => {
+    task.completed = true
+    console.log('update ', task.id, task.userID, task.title)
+    removeFromList(toDoList, task)
+    pushTask(doneList, task)
+}
+
+
+
+export const handleUpdateToDoTaskSearch = (newValue: string) => {
+    toDoTaskSearch.value = newValue
+}
+
+
+export const handleUpdateDoneTaskSearch = (newValue: string) => {
+    doneTaskSearch.value = newValue
+}
 
 
 
