@@ -1,8 +1,8 @@
 <template>
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-outline-dark w-100 text-start task-title" draggable="true"
-            data-bs-toggle="modal" :data-bs-target="'#' + todoTask.id" @dragstart="handleDragStart($event, todoTask)"
-            @click="openToDoTaskModal"> {{ todoTask.title }}
+            data-bs-toggle="modal" :data-bs-target="'#' + todoTask.id"
+            @dragstart="store.handleDragStart($event, todoTask)" @click="openToDoTaskModal"> {{ todoTask.title }}
         </button>
 
         <Teleport to="body">
@@ -19,9 +19,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-primary"
-                                @click="updateTaskEvent(todoTask, userIDModify, titleIDModify)">UPDATE</button>
+                                @click="store.updateTaskEvent(todoTask, userIDModify, titleIDModify)">UPDATE</button>
                             <button type="button" class="btn btn-outline-primary"
-                                @click="doneTaskEvent(todoTask, userIDModify, titleIDModify)">DONE</button>
+                                @click="store.doneTaskEvent(todoTask, userIDModify, titleIDModify)">DONE</button>
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
                                 @click="closeToDoTaskModal">CLOSE</button>
                         </div>
@@ -33,6 +33,9 @@
 </template>
 
 <script setup lang="ts">
+import { useToDoStore } from '~/stores/toDo'
+import type { Task } from '~/stores/toDo'
+const store = useToDoStore()
 const status = ref<boolean>(false)
 const props = defineProps<{ todoTask: Task }>()
 const isToDoTaskModalOpen = ref<boolean>(false)

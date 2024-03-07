@@ -6,7 +6,7 @@
         <div class="card-body d-flex justify-content-between">
 
             <!-- To Do List -->
-            <div class="card mx-auto" style="width: 45%;" @dragover="handleDragOver($event, 'toDoList')">
+            <div class="card mx-auto" style="width: 45%;" @dragover="store.handleDragOver($event, 'toDoList')">
 
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span class="text-start">TO DO LIST</span>
@@ -15,11 +15,12 @@
 
                 <div class="card-body">
 
-                    <InputSearchInput :value="toDoTaskSearch" :onUpdateSearchValue="handleUpdateToDoTaskSearch" />
+                    <InputSearchInput :value="store.toDoTaskSearch"
+                        :onUpdateSearchValue="store.handleUpdateToDoTaskSearch" />
 
                     <div style="height: calc(100vh - 140px); overflow-y: auto;">
                         <ul class="list">
-                            <li v-for="task in filteredToDoList" :key="task.id">
+                            <li v-for="task in store.filteredToDoList" :key="task.id">
                                 <ButtonToDoTask :todoTask="task" />
                             </li>
                         </ul>
@@ -28,17 +29,18 @@
             </div>
 
             <!-- Done List -->
-            <div class="card mx-auto" style="width: 45%;" @dragover="handleDragOver($event, 'doneList')">
+            <div class="card mx-auto" style="width: 45%;" @dragover="store.handleDragOver($event, 'doneList')">
 
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span class="text-start">DONE LIST</span>
                 </div>
 
                 <div class="card-body">
-                    <InputSearchInput :value="doneTaskSearch" :onUpdateSearchValue="handleUpdateDoneTaskSearch" />
+                    <InputSearchInput :value="store.doneTaskSearch"
+                        :onUpdateSearchValue="store.handleUpdateDoneTaskSearch" />
                     <div style="height: calc(100vh - 140px); overflow-y: auto;">
                         <ul class="list">
-                            <li v-for="task in filteredDoneList" :key="task.id">
+                            <li v-for="task in store.filteredDoneList" :key="task.id">
                                 <ButtonDoneTask :doneTask="task" />
                             </li>
                         </ul>
@@ -51,7 +53,8 @@
 
 
 <script setup lang="ts">
-import { toDoTaskSearch, doneTaskSearch } from '~/utils/ToDo'
+import { useToDoStore } from '~/stores/toDo'
+const store = useToDoStore()
 </script>
 
 
