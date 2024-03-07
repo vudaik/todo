@@ -20,12 +20,11 @@ export const useToDoStore = defineStore({
         toDoTaskSearch: '', 
     }),
     getters: {
-        // Getter to filter and sort the to-do tasks list
         filteredToDoList(state) {
             return state.toDoList.filter(task => task.title.toLowerCase().includes(state.toDoTaskSearch.toLowerCase()))
                 .sort((a, b) => a.title.localeCompare(b.title));
         },
-        // Getter to filter and sort the done tasks list
+
         filteredDoneList(state) {
             return state.doneList.filter(task => task.title.toLowerCase().includes(state.doneTaskSearch.toLowerCase()))
                 .sort((a, b) => a.title.localeCompare(b.title));
@@ -99,7 +98,6 @@ export const useToDoStore = defineStore({
         handleDragStart(event: DragEvent, task: Task) {
             this.draggedTask = task;
             event.dataTransfer?.setData('text/plain', 'This text may be dragged');
-            console.log('Dragging', this.draggedTask?.title);
         },
 
         handleDragOver(event: DragEvent, listName: string) {
@@ -108,13 +106,14 @@ export const useToDoStore = defineStore({
                 event.dataTransfer.dropEffect = 'move';
                 console.log('Dragging over:', listName);
 
-                this.draggedTask.completed = !this.draggedTask.completed
                 this.removeFromOriginalList(this.draggedTask);
                 switch (listName) {
                     case 'toDoList':
+                        this.draggedTask.completed = false
                         this.pushTask(this.toDoList, this.draggedTask);
                         break;
                     case 'doneList':
+                        this.draggedTask.completed = true
                         this.pushTask(this.doneList, this.draggedTask);
                         break;
                     default:
