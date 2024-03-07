@@ -1,1 +1,0 @@
-export { default } from "file:///C:/VuDoan/Sample_Projects/todo/apps/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"
