@@ -7,12 +7,6 @@ export default defineNuxtConfig ({
   plugins: [
   ],
 
-
-  // buildModules: [
-  //   '@nuxt/typescript-build',
-  //   '@nuxtjs/pinia',
-  // ],
-
   modules: [
     '@pinia/nuxt'
   ]
