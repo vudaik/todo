@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- <NuxtWelcome /> -->
-    <VModel />
+    <!-- <VModel /> -->
+    <PropsEmitsParentComponent />
   </div>
 </template>
 
