@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-// import {Task} from '~/utils/ToDo'
+// import {Task} from '~/utils/ToDo'cv 
 
 const props = defineProps<{ 
     detailTask: Task, 
