@@ -19,7 +19,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-success"
-                            @click="createNewTaskEvent(newTask, userIDModify, titleIDModify)">CREATE</button>
+                            @click="store.createNewTaskEvent(newTask, userIDModify, titleIDModify)">CREATE</button>
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
                             @click="closeCreateTaskModal">CLOSE</button>
                     </div>
@@ -30,6 +30,8 @@
 </template>
 
 <script setup lang="ts">
+import { useToDoStore } from '~/stores/toDo'
+const store = useToDoStore()
 const isCreateTaskModalOpen = ref<boolean>(false)
 const userIDModify = ref<number>(0)
 const titleIDModify = ref<string>('')

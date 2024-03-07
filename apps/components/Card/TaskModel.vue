@@ -24,6 +24,9 @@
 
 
 <script setup lang="ts">
+import { useToDoStore } from '~/stores/toDo'
+import type { Task } from '~/stores/toDo'
+const store = useToDoStore()
 const props = defineProps<{ detailTask: Task, readOnlyStatus: boolean }>()
 const cloneUserID = ref<number>(props.detailTask.userID)
 const cloneTitle = ref<string>(props.detailTask.title)
