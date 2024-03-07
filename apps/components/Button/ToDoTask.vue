@@ -22,9 +22,11 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-primary "
-                                @click="updateTaskEvent(todoTask, userIDModify, titleIDModify)">UPDATE</button>
+                                >UPDATE</button>
+                                <!-- @click="updateTaskEvent(todoTask, userIDModify, titleIDModify)"  -->
                             <button type="button" class="btn btn-outline-primary "
-                                @click="doneTaskEvent(todoTask, userIDModify, titleIDModify)">DONE</button>
+                                >DONE</button>
+                                <!-- @click="doneTaskEvent(todoTask, userIDModify, titleIDModify)" -->
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
                                 @click="closeToDoTaskModal">CLOSE</button>
                         </div>
@@ -37,10 +39,12 @@
 
 <script setup lang="ts">
 import type { Task } from '~/utils/ToDo'
+import type { ref } from 'vue'
 
-const userIDModify = ref(<number>)()
-const titleIDModify = ref(<string>)()
-const props = defineProps<{ todoTask: Task, userIDModify: number, titleIDModify: string }>()
+// const userIDModify = ref<number>(0)
+// const titleIDModify = ref<string>('')
+const props = defineProps<{ todoTask: Task }>()
+// , userIDModify: number, titleIDModify: string
 const isToDoTaskModalOpen = ref<boolean>(false)
 
 const openToDoTaskModal = () => {

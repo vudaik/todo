@@ -1,3 +1,4 @@
+<!-- TaskModel.vue -->
 <template>
     <div>
 
@@ -6,7 +7,7 @@
                 <span class="input-group-text" id="basic-addon1">User ID</span>
             </div>
             <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
-                v-model="detailTask.userID" :value="">
+                v-model="detailTask.userID" :readonly="readOnlyStatus">
         </div>
 
         <div class="input-group mb-3">
@@ -14,14 +15,20 @@
                 <span class="input-group-text" id="basic-addon1">Title</span>
             </div>
             <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
-                v-model="detailTask.title">
+                v-model="detailTask.title" :readonly="readOnlyStatus">
         </div>
 
     </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ detailTask: Task, userIDModify: number, titleIDModify: string }>()
+// import {Task} from '~/utils/ToDo'cv 
+
+const props = defineProps<{ 
+    detailTask: Task, 
+    readOnlyStatus: boolean 
+}>()
+// , userIDModify: number, titleIDModify: string
 </script>
 
 

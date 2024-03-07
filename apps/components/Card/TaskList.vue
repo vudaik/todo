@@ -1,3 +1,4 @@
+<!-- TaskList.vue -->
 <template>
     <div class="card text-center vh-100 d-flex flex-column justify-content-center">
 
@@ -41,7 +42,6 @@
                 <div class="card-body">
 
                     <InputSearchInput :value="toDoTaskSearch" :onUpdateSearchValue="handleUpdateToDoTaskSearch" />
-                    <!-- tại sao không thể dùng v-model ở đây được, tìm hiểu thêm -->
 
                     <div style="height: calc(100vh - 140px); overflow-y: auto;">
                         <ul class="list">
@@ -67,7 +67,7 @@
                     <div style="height: calc(100vh - 140px); overflow-y: auto;">
                         <ul class="list">
                             <li v-for="task in filteredDoneList" :key="task.id">
-                                <ButtonDoneTask :task="task" />
+                                <ButtonDoneTask :doneTask="task" />
                             </li>
                         </ul>
                     </div>
@@ -80,6 +80,7 @@
 
 
 <script setup lang="ts">
+
 import {
     toDoTaskSearch,
     doneTaskSearch

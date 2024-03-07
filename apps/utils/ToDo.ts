@@ -5,12 +5,12 @@ import axios from 'axios';
 const taskList = reactive<Task[]>([])
 const toDoList = reactive<Task[]>([])
 const doneList = reactive<Task[]>([])
+var draggedTask = ref<Task>() // không thể để reactive() ???? -> tìm hiểu thêm
+
 export const doneTaskSearch = ref('')
 export const toDoTaskSearch = ref('')
 
-
 const DATA_PATH: string = 'https://jsonplaceholder.typicode.com/todos'
-var draggedTask = ref<Task>() // không thể để reactive() ???? -> tìm hiểu thêm
 
 
 
@@ -21,10 +21,14 @@ export interface Task {
     completed: boolean
 }
 
+const getID = () => {
+    return Math.floor(Math.random() * 1000000)
+}
+
 
 const createTask = (params: Partial<Task> = {}): Task => {
     return reactive<Task>({
-        id: params.id || 0,
+        id: params.id || getID(),
         userID: params.userID || 0,
         title: params.title || '',
         completed: params.completed || false
@@ -136,6 +140,7 @@ export const handleDragOver = (event: DragEvent, listName: string) => {
 
 
 export const createNewTaskEvent = (task: Task) => {
+    task.id = getID()
     console.log('create ', task.id, task.userID, task.title)
     pushTask(toDoList, task)
 }
