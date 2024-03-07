@@ -1,10 +1,10 @@
 <!-- DoneTask.vue -->
+
 <template>
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-outline-dark w-100 text-start task-title" draggable="true"
             data-bs-toggle="modal" :data-bs-target="'#' + doneTask.id" @dragstart="handleDragStart($event, doneTask)"
-            @click="openDoneTaskModal">
-            {{ doneTask.title }}
+            @click="openDoneTaskModal"> {{ doneTask.title }}
         </button>
 
         <Teleport to="body">
@@ -19,7 +19,7 @@
                                 @click="closeDoneTaskModal"></button>
                         </div>
                         <div class="modal-body">
-                            <CardTaskModel :detailTask="doneTask" :readOnlyStatus="status" />
+                            <CardTaskModel :detailTask="doneTask" :readOnlyStatus="status" @updateModel="showTask" />
                         </div>
                         <div class="modal-footer">
                         </div>
@@ -36,13 +36,11 @@ const props = defineProps<{ doneTask: Task }>()
 const isDoneTaskModalOpen = ref<boolean>(false)
 const status = ref<boolean>(true)
 
-const openDoneTaskModal = () => {
-    isDoneTaskModalOpen.value = true
-}
+const openDoneTaskModal = () => { isDoneTaskModalOpen.value = true }
 
-const closeDoneTaskModal = () => {
-    isDoneTaskModalOpen.value = false
-}
+const closeDoneTaskModal = () => { isDoneTaskModalOpen.value = false }
+
+const showTask = () => { }
 </script>
 
 <style></style>

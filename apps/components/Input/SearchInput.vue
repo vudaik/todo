@@ -6,17 +6,15 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps<{
-    value: string;
-    onUpdateSearchValue: Function;
+    value: string
+    onUpdateSearchValue: Function
 }>()
 
 const searchValue = ref(props.value)
 
-function updateSearchValue(event: Event) {
+const updateSearchValue = (event: Event) => {
     searchValue.value = (event.target as HTMLInputElement).value
-    // Gọi props function để cập nhật giá trị mới của search
     props.onUpdateSearchValue(searchValue.value)
 }
 </script>

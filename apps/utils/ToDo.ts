@@ -1,17 +1,11 @@
-import axios from 'axios';
+import axios from 'axios'
 
-
-
-const taskList = reactive<Task[]>([])
+const DATA_PATH: string = 'https://jsonplaceholder.typicode.com/todos'
 const toDoList = reactive<Task[]>([])
 const doneList = reactive<Task[]>([])
 var draggedTask = ref<Task>() // không thể để reactive() ???? -> tìm hiểu thêm
-
 export const doneTaskSearch = ref('')
 export const toDoTaskSearch = ref('')
-
-const DATA_PATH: string = 'https://jsonplaceholder.typicode.com/todos'
-
 
 
 export interface Task {
@@ -21,14 +15,13 @@ export interface Task {
     completed: boolean
 }
 
-const getID = () => {
-    return Math.floor(Math.random() * 1000000)
-}
+
+const getID = () => { return Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000 }
 
 
 const createTask = (params: Partial<Task> = {}): Task => {
     return reactive<Task>({
-        id: params.id || getID(),
+        id: getID(),
         userID: params.userID || 0,
         title: params.title || '',
         completed: params.completed || false
@@ -42,7 +35,6 @@ const fetchTasks = async (list: Task[]) => {
         const todos = response.data;
 
         toDoList.splice(0);
-        taskList.splice(0); // Xóa tất cả các phần tử trong taskList
         doneList.splice(0); // Xóa tất cả các phần tử trong doneList
 
         todos.forEach((todo: any) => {
@@ -50,11 +42,8 @@ const fetchTasks = async (list: Task[]) => {
             if (task.completed === true) {
                 doneList.push(task); // Thêm vào danh sách doneList nếu nhiệm vụ đã hoàn thành
             }
-            else if (task.completed === false) {
-                toDoList.push(task); // Thêm vào danh sách toDoList không phụ thuộc vào trạng thái hoàn thành
-            }
             else {
-                taskList.push(task); // Thêm vào danh sách taskList nếu nhiệm vụ chưa hoàn thành
+                toDoList.push(task); // Thêm vào danh sách toDoList không phụ thuộc vào trạng thái hoàn thành
             }
         })
     } catch (error) {
@@ -64,16 +53,11 @@ const fetchTasks = async (list: Task[]) => {
 fetchTasks(toDoList);  // học vòng đời rồi đặt get data trong nó
 
 
-const pushTask = (list: Task[], task: Task) => {
-    list.push(task);
-}
+const pushTask = (list: Task[], task: Task) => { list.push(task) }
 
 
 const removeFromOriginalList = (task: Task) => {
-    // Find and remove the task from the original list
-    if (taskList.includes(task)) {
-        removeFromList(taskList, task);
-    } else if (toDoList.includes(task)) {
+    if (toDoList.includes(task)) {
         removeFromList(toDoList, task);
     } else if (doneList.includes(task)) {
         removeFromList(doneList, task);
@@ -87,9 +71,6 @@ const removeFromList = (list: Task[], task: Task) => {
         list.splice(index, 1);
     }
 }
-
-
-// Export Event
 
 
 export const filteredToDoList = computed(() => {
@@ -122,9 +103,6 @@ export const handleDragOver = (event: DragEvent, listName: string) => {
         if (draggedTask.value) {
             removeFromOriginalList(draggedTask.value);
             switch (listName) {
-                case 'taskList':
-                    pushTask(taskList, draggedTask.value);
-                    break;
                 case 'toDoList':
                     pushTask(toDoList, draggedTask.value);
                     break;
@@ -139,38 +117,37 @@ export const handleDragOver = (event: DragEvent, listName: string) => {
 }
 
 
-export const createNewTaskEvent = (task: Task) => {
+export const createNewTaskEvent = (task: Task, _userID: number, _title: string) => { 
     task.id = getID()
-    console.log('create ', task.id, task.userID, task.title)
-    pushTask(toDoList, task)
+    task.userID = _userID
+    task.title = _title
+    task.completed = false
+    console.log('create ', task.id, task.userID, task.title, task.completed)
+    pushTask(toDoList, task) 
 }
 
 
-export const updateTaskEvent = (task: Task) => {
-    console.log('update ', task.id, task.userID, task.title)
-
-    // xóa cái hiện tại 
-    // thêm lại cái mới có 
+export const updateTaskEvent = (task: Task, _userID: number, _title: string) => {
+    task.userID = _userID
+    task.title = _title
+    console.log('update ', task.id, task.userID, task.title, task.completed)
 }
 
 
-export const doneTaskEvent = (task: Task) => {
+export const doneTaskEvent = (task: Task, _userID: number, _title: string) => {
     task.completed = true
-    console.log('update ', task.id, task.userID, task.title)
+    task.userID = _userID
+    task.title = _title
+    console.log('done ', task.id, task.userID, task.title, task.completed)
     removeFromList(toDoList, task)
     pushTask(doneList, task)
 }
 
 
-
-export const handleUpdateToDoTaskSearch = (newValue: string) => {
-    toDoTaskSearch.value = newValue
-}
+export const handleUpdateToDoTaskSearch = (newValue: string) => { toDoTaskSearch.value = newValue }
 
 
-export const handleUpdateDoneTaskSearch = (newValue: string) => {
-    doneTaskSearch.value = newValue
-}
+export const handleUpdateDoneTaskSearch = (newValue: string) => { doneTaskSearch.value = newValue }
 
 
 

@@ -1,4 +1,5 @@
 <!-- TaskList.vue -->
+
 <template>
     <div class="card text-center vh-100 d-flex flex-column justify-content-center">
 
@@ -9,34 +10,7 @@
 
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span class="text-start">TO DO LIST</span>
-                    <div class="d-flex justify-content-end">
-                        <NuxtLink to="" class="" data-bs-toggle="modal" data-bs-target="#addTaskModal"
-                            @click="openCreateTaskModal">ADD TASK
-                        </NuxtLink>
-                        <div class="modal fade show" :style="{ 'display': isCreateTaskModalOpen ? 'block' : 'none' }"
-                            id="addTaskModal" tabindex="-1" a ria-labelledby="exampleModalLabel" aria-hidden="true"
-                            v-if="isCreateTaskModalOpen">
-                            <div class="modal-dialog modal-xl">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">CREATE NEW
-                                            TASK</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close" @click="closeCreateTaskModal"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <TaskModel :detailTask="createTask" />
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-success"
-                                            @click="createNewTaskEvent(createTask)">CREATE</button>
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                            @click="closeCreateTaskModal">CLOSE</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <CardNewTask />
                 </div>
 
                 <div class="card-body">
@@ -61,9 +35,7 @@
                 </div>
 
                 <div class="card-body">
-
                     <InputSearchInput :value="doneTaskSearch" :onUpdateSearchValue="handleUpdateDoneTaskSearch" />
-
                     <div style="height: calc(100vh - 140px); overflow-y: auto;">
                         <ul class="list">
                             <li v-for="task in filteredDoneList" :key="task.id">
@@ -73,30 +45,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
 
 
 <script setup lang="ts">
-
-import {
-    toDoTaskSearch,
-    doneTaskSearch
-} from '~/utils/ToDo'
-
-const createTask = reactive({ id: 0, userID: 0, title: '', completed: false })
-const isCreateTaskModalOpen = ref<boolean>(false)
-
-const openCreateTaskModal = () => {
-    console.log('create task modal')
-    isCreateTaskModalOpen.value = true
-}
-
-const closeCreateTaskModal = () => {
-    isCreateTaskModalOpen.value = false
-}
+import { toDoTaskSearch, doneTaskSearch } from '~/utils/ToDo'
 </script>
 
 

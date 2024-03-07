@@ -1,7 +1,6 @@
 <template>
   <div>
     <CardTaskList />
-    <!-- <ParentComponent /> -->
   </div>
 </template>
 

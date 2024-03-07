@@ -2,10 +2,7 @@
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-outline-dark w-100 text-start task-title" draggable="true"
             data-bs-toggle="modal" :data-bs-target="'#' + todoTask.id" @dragstart="handleDragStart($event, todoTask)"
-            @click="openToDoTaskModal">
-            {{
-                todoTask.title
-            }}
+            @click="openToDoTaskModal"> {{ todoTask.title }}
         </button>
 
         <Teleport to="body">
@@ -18,15 +15,13 @@
                             <h5 class="modal-title" id="taskDetailModalLabel">TASK DETAILS</h5>
                         </div>
                         <div class="modal-body">
-                            <TaskModel :detailTask="todoTask" />
+                            <CardTaskModel :detailTask="todoTask" :readOnlyStatus="status" @updateModel="updateTask" />
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary "
-                                >UPDATE</button>
-                                <!-- @click="updateTaskEvent(todoTask, userIDModify, titleIDModify)"  -->
-                            <button type="button" class="btn btn-outline-primary "
-                                >DONE</button>
-                                <!-- @click="doneTaskEvent(todoTask, userIDModify, titleIDModify)" -->
+                            <button type="button" class="btn btn-outline-primary"
+                                @click="updateTaskEvent(todoTask, userIDModify, titleIDModify)">UPDATE</button>
+                            <button type="button" class="btn btn-outline-primary"
+                                @click="doneTaskEvent(todoTask, userIDModify, titleIDModify)">DONE</button>
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
                                 @click="closeToDoTaskModal">CLOSE</button>
                         </div>
@@ -38,22 +33,22 @@
 </template>
 
 <script setup lang="ts">
-import type { Task } from '~/utils/ToDo'
-import type { ref } from 'vue'
-
-// const userIDModify = ref<number>(0)
-// const titleIDModify = ref<string>('')
+const status = ref<boolean>(false)
 const props = defineProps<{ todoTask: Task }>()
-// , userIDModify: number, titleIDModify: string
 const isToDoTaskModalOpen = ref<boolean>(false)
+const userIDModify = ref<number>(props.todoTask.userID)
+const titleIDModify = ref<string>(props.todoTask.title)
 
 const openToDoTaskModal = () => {
-    console.log(props.todoTask.id, props.todoTask.userID, props.todoTask.title, props.todoTask.completed, isToDoTaskModalOpen.value)
+    console.log(props.todoTask.id, props.todoTask.userID, props.todoTask.title, props.todoTask.completed)
     isToDoTaskModalOpen.value = true
-
 }
-const closeToDoTaskModal = () => {
-    isToDoTaskModalOpen.value = false
+
+const closeToDoTaskModal = () => { isToDoTaskModalOpen.value = false }
+
+const updateTask = (_userID: number, _title: string) => {
+    userIDModify.value = _userID
+    titleIDModify.value = _title
 }
 </script>
 
