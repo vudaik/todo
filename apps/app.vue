@@ -6,8 +6,6 @@
 
 <script setup lang="ts">
 import { useToDoStore } from '~/stores/toDo'
-const store = useToDoStore();
-onMounted(() => {
-  store.fetchTasks()
-})
+const store = useToDoStore()
+onBeforeMount(() => { store.fetchTasks() })
 </script>

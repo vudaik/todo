@@ -4,10 +4,10 @@ import axios from 'axios';
 const DATA_PATH: string = 'https://jsonplaceholder.typicode.com/todos'; 
 
 export interface Task {
-    id: number;
-    userID: number;
-    title: string;
-    completed: boolean;
+    id: number
+    userID: number
+    title: string
+    completed: boolean
 }
 
 export const useToDoStore = defineStore({
@@ -86,7 +86,6 @@ export const useToDoStore = defineStore({
             }
         },
 
-        // Updating the search keyword for the to-do tasks list
         handleUpdateToDoTaskSearch(newValue: string) {
             this.toDoTaskSearch = newValue;
         },
